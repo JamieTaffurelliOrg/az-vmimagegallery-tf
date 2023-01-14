@@ -5,7 +5,6 @@ resource "azurerm_shared_image_gallery" "images" {
   description         = var.image_gallery_description
   tags                = var.tags
 }
-
 resource "azurerm_shared_image" "images" {
   for_each                            = { for k in var.images : k.name => k if k != null }
   name                                = each.key
