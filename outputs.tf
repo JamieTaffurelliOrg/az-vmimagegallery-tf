@@ -9,7 +9,7 @@ output "shared_image_gallery_unique_name" {
 }
 
 output "images" {
-  value       = azurerm_shared_image.images
+  value       = { for k, v in azurerm_shared_image.images : k => v }
   description = "The images deployed to the Shared Image Gallery"
 }
 
