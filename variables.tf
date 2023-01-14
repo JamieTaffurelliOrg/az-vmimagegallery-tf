@@ -51,6 +51,33 @@ variable "images" {
   description = "Images to deploy to Shared Image Gallery"
 }
 
+variable "storage_account_name" {
+  type        = string
+  description = "The name of the storage account to store vm config scripts"
+}
+
+variable "storage_account_network_rules" {
+  type = object(
+    {
+      default_action             = optional(string, "Deny")
+      ip_rules                   = optional(list(string), [])
+      virtual_network_subnet_ids = optional(list(string), [])
+    }
+  )
+  default     = {}
+  description = "The Storage Account firewall rules"
+}
+
+variable "log_analytics_workspace" {
+  type = object(
+    {
+      name                = string
+      resource_group_name = string
+    }
+  )
+  description = "The existing log analytics workspaces to send diagnostic logs to"
+}
+
 variable "tags" {
   type        = map(string)
   description = "Tags to apply to resources"

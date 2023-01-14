@@ -32,3 +32,9 @@ output "user_assigned_identity_tenant_id" {
   value       = azurerm_user_assigned_identity.images.tenant_id
   description = "Tenant ID of the User Assigned Identity"
 }
+
+output "storage_account" {
+  value       = azurerm_storage_account.storage
+  sensitive   = true
+  description = "Properties of the Storage Accounts"
+}
