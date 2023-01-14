@@ -18,7 +18,7 @@ variable "image_gallery_description" {
 }
 
 variable "images" {
-  type = map(object({
+  type = list(object({
     name                                = string
     os_type                             = string
     description                         = string
