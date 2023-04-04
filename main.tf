@@ -44,6 +44,11 @@ resource "azurerm_user_assigned_identity" "images" {
 }
 
 resource "azurerm_storage_account" "storage" {
+  #checkov:skip=CKV2_AZURE_33:This is an old way of logging, diagnostics are enabled
+  #checkov:skip=CKV_AZURE_33:This is an old way of logging, diagnostics are enabled
+  #checkov:skip=CKV2_AZURE_18:This is unnecessary for most scenarios
+  #checkov:skip=CKV2_AZURE_1:We may require some storage accounts to not have firewalls
+  #checkov:skip=CKV_AZURE_59:Value is deprecated
   name                            = var.storage_account_name
   location                        = var.location
   resource_group_name             = var.resource_group_name
@@ -79,12 +84,14 @@ resource "azurerm_storage_account" "storage" {
 }
 
 resource "azurerm_storage_container" "container" {
+  #checkov:skip=CKV2_AZURE_21:This is an old way of logging, diagnostics are enabled
   name                  = "scripts"
   storage_account_name  = azurerm_storage_account.storage.name
   container_access_type = "private"
 }
 
 resource "azurerm_storage_account_network_rules" "rules" {
+  #checkov:skip=CKV_AZURE_35:We may require these storage accounts to be publicly accessible
   storage_account_id         = azurerm_storage_account.storage.id
   default_action             = var.storage_account_network_rules.default_action
   ip_rules                   = var.storage_account_network_rules.ip_rules
