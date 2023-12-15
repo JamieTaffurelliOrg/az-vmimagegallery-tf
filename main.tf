@@ -133,6 +133,10 @@ resource "azurerm_monitor_diagnostic_setting" "storage_account_blob_diagnostics"
     category = "StorageWrite"
   }
 
+  enabled_log {
+    category = "StorageDelete"
+  }
+
   metric {
     category = "Transaction"
     enabled  = true
